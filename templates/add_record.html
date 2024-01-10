@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Record</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for animation -->
+    <style>
+        /* Add your animation styles here */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        .slideInDown {
+            animation-name: slideInDown;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Record</h1>
+        <form action="/add_record" method="post" class="animated slideInDown">
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" class="form-control" required>
+            </div>
+            <!-- Add input fields for each subject -->
+            <!-- Example: Mathematics -->
+            <div class="form-group">
+                <label for="Mathematics">Mathematics:</label>
+                <input type="number" id="Mathematics" name="Mathematics" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="English">English:</label>
+                <input type="number" id="English" name="English" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Chemistry">Chemistry:</label>
+                <input type="number" id="Chemistry" name="Chemistry" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Physics">Physics:</label>
+                <input type="number" id="Physics" name="Physics" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Biology">Biology:</label>
+                <input type="number" id="Biology" name="Biology" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Computer">Computer:</label>
+                <input type="number" id="Mathematics" name="Computer" class="form-control">
+            </div>
+
+            <div class="form-group"> 
+                <label for="Commerce">Commerce:</label>
+                <input type="number" id="Commerce" name="Commerce" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Acccounting">Acccounting:</label>
+                <input type="number" id="Commerce" name="Acccounting" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Literature">Literature:</label>
+                <input type="number" id="Literature" name="Literature" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Government">Government:</label>
+                <input type="number" id="Government" name="Government" class="form-control">
+            </div>
+
+            
+            <div class="form-group">
+                <label for="Economic">Economic:</label>
+                <input type="number" id="Economic" name="Economic" class="form-control">
+            </div>
+            <!-- Add input fields for other subjects -->
+            <!-- Example: English, Chemistry, Physics, etc. -->
+            <!-- ... -->
+            <div class="form-group">
+                <label for="year_grade">Year/Grade:</label>
+                <input type="number" id="year_grade" name="year_grade" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

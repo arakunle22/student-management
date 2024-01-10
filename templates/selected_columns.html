@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+          .btn-bold {
+    font-weight: bold;
+  }
+
+  .fw-bold{
+    font-weight: bold !important;
+  }
+
+  .btn-outline-light:hover {
+    color: red;
+  }
+
+      </style>
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand fw-bold" href="#">SIMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+              >Add Student</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="{{ url_for('view_students') }}"
+              >View Students</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+  <div class="container-fluid mt-4">
+        <div class="bg-warning">
+        <h1>Student Academic Result</h1>
+    </div>
+        <form class="m-5">
+            <div class="form-group">
+                <label for="studentIdInput">Search by Student ID:</label>
+                <input type="text" class="form-control" id="studentIdInput" placeholder="Enter Student ID">
+            </div>
+            <button type="button" class="btn btn-outline-danger" onclick="searchStudent()" >Search</button>
+        </form>
+    <table class="table table-bordered table-striped" border="1">
+        <thead>
+            <tr>
+                <th>student_id</th>
+                <th>Department</th>
+                <th>Mathematics</th>
+                <th>English</th>
+                <th>Chemistry</th>                
+                <th>Physics</th>
+                <th>Biology</th>
+                <th>Computer</th>
+                <th>Commerce</th>
+                <th>Acccounting</th>
+                <th>Literature</th>
+                <th>Government</th>
+                <th>Economic</th>
+                <th>Percentage Score</th>
+
+                <!-- Add other column headings here -->
+            </tr>
+        </thead>
+        <tbody id="studentTableBody">
+            {% for row in academic_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4]}}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row[11] }}</td>
+                    <td>{{ row[12] }}</td>
+                    <td>{{ row[-1] }}</td>
+                    <!-- Add other table data here -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p id="notFoundMessage" style="display: none; color: red;">Record not found!</p>
+    </div>
+    </div>
+
+     <!-- Bootstrap JS -->
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+        function searchStudent() {
+            var input, filter, table, tbody, tr, td, i, txtValue;
+            input = document.getElementById("studentIdInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table");
+            tbody = document.getElementById("studentTableBody");
+            tr = tbody.getElementsByTagName("tr");
+
+            var found = false;
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Assuming student_id is in the first column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        found = true;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+            var notFoundMessage = document.getElementById("notFoundMessage");
+            if (!found) {
+                notFoundMessage.style.display = "block";
+            } else {
+                notFoundMessage.style.display = "none";
+            }
+        }
+    </script>
+    </body>
+  </html>
+  

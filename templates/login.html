@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='view.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- ############ STYLE ############# -->
+    <style>
+     body {
+  background-image: url('/static/img/bg-4.jpg'); /* Set the URL of your image */
+  background-size: cover; /* Adjusts the image size to cover the entire background */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  /* Additional properties like background-position or background-color can also be added */
+}
+.login-container {
+    margin-top: 150px;
+    transition: all 0.3s ease; /* Adding a transition to all properties with a duration of 0.3 seconds */
+  }
+
+  .login-container:hover {
+    transform: scale(1.05); /* Scale the element slightly on hover (adjust as needed) */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adding a subtle box shadow on hover */
+  }
+      .login-container {
+        margin-top: 150px;
+      }
+
+      .login-container .row {
+        align-items: center;
+      }
+
+      .login-container .left-column {
+        padding-right: 20px;
+      }
+
+      box{
+        margin-top: 100px;
+
+      }
+
+      .header {
+        /* background-color: #e2006c; */
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+      }
+
+      .btn-outline-warning:hover {
+    color: white;
+  }
+
+  .btn-bold {
+    font-weight: bold;
+  } 
+
+  .fw-bold{
+    font-weight: bold !important;
+  }
+
+  .form-check-input-lg {
+    width: 1.1em; /* Adjust the width as needed */
+    height: 1.1em; /* Adjust the height as needed */
+  }
+    </style>
+  </head>
+
+  <body>
+    <div class="header bg-danger">
+      <h1>Welcome to Student Information Managemtent System (SIMS)</h1>
+    </div>
+
+    <div class="container box">
+      <div class="row login-container">
+        <div class="col-md-6 left-column">
+          <img
+            src="{{ url_for('static', filename='img/login_system.svg') }}"
+            class="img-fluid"
+            alt="SVG Image"
+          />
+
+          <!-- <img src="https://via.placeholder.com/300" class="img-fluid" alt="Placeholder Image"> -->
+        </div>
+        <div class="col-md-6">
+          <h2 class="fw-bold text-white text-center">Login</h2>
+          {% if error %}
+          <p class="text-danger mt-3 h5" id="invalid-login">{{ error }}</p>
+          {% endif %}
+          <form method="post">
+            <div class="form-group">
+              <label for="username" class="h5 text-warning">Username</label>
+              <input
+                type="text"
+                name="username"
+                class="form-control form-control-lg"
+                id="username"
+                placeholder="Enter username"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password" class="h5 text-warning">Password</label>
+              <input
+                type="password"
+                name="password"
+                class="form-control form-control-lg"
+                id="password"
+                placeholder="Enter password"
+              />
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input form-check-input-lg" id="remember"/>
+              <label class="form-check-label h5 text-danger form-check-label-lg" for="remember">Remember Me</label>
+            </div>
+            <button type="submit" class="btn btn-bold btn-lg btn-block btn-outline-warning">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Check if the Remember Me checkbox is checked
+      const rememberMeCheckbox = document.getElementById('remember');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+    
+      rememberMeCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+          // If checked, store the username and password in localStorage
+          localStorage.setItem('username', usernameInput.value);
+          localStorage.setItem('password', passwordInput.value);
+        } else {
+          // If unchecked, remove the stored data from localStorage
+          localStorage.removeItem('username');
+          localStorage.removeItem('password');
+        }
+      });
+    
+      // Check if there's stored data in localStorage and populate the inputs
+      window.addEventListener('load', function () {
+        if (localStorage.getItem('username') && localStorage.getItem('password')) {
+          usernameInput.value = localStorage.getItem('username');
+          passwordInput.value = localStorage.getItem('password');
+          rememberMeCheckbox.checked = true;
+        }
+      });
+    </script>
+  </body>
+</html>

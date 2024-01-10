@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>View Students</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='view.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <style>
+      .table-container {
+        margin-top: 40px;
+        animation: slideInLeft 1s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      td {
+        padding: 5px; /* You can adjust the padding value */
+      }
+
+      .btn-bold {
+    font-weight: bold;
+  }
+
+  .fw-bold{
+    font-weight: bold !important;
+  }
+
+  .btn-outline-light:hover {
+    color: red;
+  }
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand fw-bold" href="#">SIMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+              >Add Student</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="{{ url_for('view_students') }}"
+              >View Students</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="table-container">
+            <h1 class="text-center bg-warning text-white fw-bold">Students Information</h1>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Middle Name</th>
+                  <th>Date of Birth</th>
+                  <th>Gender</th>
+                  <th>Phone Number</th>
+                  <th>Address</th>
+                  <th>Emergency Contact</th>
+                  <th></th>
+                  <th></th>
+                  <!-- Add other table headers -->
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in students %}
+                <tr>
+                  <td>{{ student[0] }}</td>
+                  <td>{{ student[1] }}</td>
+                  <td>{{ student[2] }}</td>
+                  <td>{{ student[3] }}</td>
+                  <td>{{ student[4] }}</td>
+                  <td>{{ student[5] }}</td>
+                  <td>{{ student[6] }}</td>
+                  <td>{{ student[7] }}</td>
+                  <td>{{ student[8] }}</td>
+                  <td>
+                    <a
+                      class="btn btn-warning"
+                      href="/edit_student/{{ student[0] }}"
+                      >Edit</a
+                    >
+                  </td>
+                  <td>
+                    <a
+                      class="btn btn-danger"
+                      href="/delete_student/{{ student[0] }}"
+                      onclick="return confirmDelete();"
+                      >Delete</a
+                    >
+                  </td>
+
+                  <!-- Add other table data -->
+                </tr>
+                {% endfor %}
+
+              <!-- Flash messages -->
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %} {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %} {% endif %} {% endwith %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function confirmDelete() {
+        return confirm("Are you sure you want to delete this student?");
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

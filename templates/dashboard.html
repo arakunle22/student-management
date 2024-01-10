@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- Font Awesome Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="..."
+    />
+
+    <style>
+      /* Optional: Custom CSS for styling */
+
+      body {
+        background-image: url("/static/img/bg-1.jpg"); /* Set the URL of your image */
+        background-size: cover; /* Adjusts the image size to cover the entire background */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        /* Additional properties like background-position or background-color can also be added */
+      }
+
+      .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* border: 2px solid #ccc; */
+        padding: 30px;
+      }
+
+      .flex-item {
+        flex: 0 0 calc(33.33% - 20px);
+        /* adjust width as needed */
+        position: relative;
+      }
+
+      .flex-item .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .flex-item .card:hover {
+        transform: scale(1.05);
+      }
+
+      .card-body {
+        display: flex;
+        align-items: center;
+        flex-direction: column; /* Arrange items vertically */
+        text-align: center; /* Center the content */
+      }
+
+      .icon {
+        font-size: 45px;
+        margin-bottom: 10px; /* Space between icon and link */
+      }
+
+      .tag-link {
+        color: #007bff;
+        transition: color 0.3s ease-in-out;
+        display: block; /* Display link as a block-level element */
+      }
+
+      .tag-link:hover {
+        color: #0056b3;
+        text-decoration: none;
+      }
+
+      .fw-bold{
+    font-weight: bold !important;
+  }
+
+  .btn-outline-light:hover {
+    color: red;
+  }
+
+      .navbar {
+        background-color: #e2006c;
+      }
+
+      .container {
+    margin-top: 90px; /* Adjust the value as needed */
+  }
+
+  .flex-item .card {
+    width: 300px; /* Adjust the width of the card */
+    height: 200px; /* Adjust the height of the card */
+    /* Other styles */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+  }
+
+  .card-container {
+    margin-top: 80px; /* Adjust the top margin to move the cards downward */
+  }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand fw-bold" href="#">SIMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="{{ url_for('dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="{{ url_for('add_student') }}"
+              >Add Student</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="{{ url_for('view_students') }}"
+              >View Students</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your Dashboard Content Goes Here -->
+    <div class="container">
+      <!-- Add your content for the dashboard -->
+
+      <h1 class="text-white fw-bold">Welcome, {{ username }}</h1>
+
+      <!-- Search Bar -->
+      <div class="d-flex align-items-right w-100 float-right">
+        <div class="my-div align-items-end w-100 float-right">
+          <form action="/search_students" method="GET" class="w-50 float-right">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for students..."
+                name="search_query"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="submit">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Total Record Count -->
+      <div class="total-records mt-5">
+        <h3 class="text-white fw-bold">Total Number of Student: {{ total_count }}</h3>
+      </div>
+
+      <div class="mt-3">
+        <a
+          href="{{ url_for('download_records') }}"
+          download="student_data.csv"
+          class="btn btn-warning text-white"
+          >Download Records</a
+        >
+      </div>
+    </div>
+
+    <div class="container card-container mt-5">
+      <div class="flex-container">
+        <div class="flex-item">
+          <div class="card">
+            <div class="card-body">
+              <i class="icon fas fa-address-book text-danger"></i><br />
+              <a class="tag-link text-warning fw-bold " href="/view-selected-columns">View Student Academic Results</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex-item">
+          <div class="card">
+            <div class="card-body">
+              <i class="icon fas fa-chart-bar text-danger"></i><br />
+              <a class="tag-link text-warning fw-bold " href="/academic_Information"
+                >Student Academic Information</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex-item">
+          <div class="card">
+            <div class="card-body">
+              <i class="icon fas fa-address-book text-danger"></i><br />
+              <a class="tag-link text-warning fw-bold " href="/view_admininfo"
+                >Student Administrative Information</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

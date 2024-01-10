@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .card {
+          margin-top: 50px;
+          animation: fadeInUp 1s ease;
+          border-radius: 15px;
+          overflow: hidden;
+          animation: fadeInUp 1s ease;
+        }
+    
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+  
+            .btn-bold {
+      font-weight: bold;
+    }
+  
+    .fw-bold{
+      font-weight: bold !important;
+    }
+  
+    .btn-outline-light:hover {
+      color: red;
+    }
+  
+      </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand fw-bold" href="#">SIMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 d-flex justify-content-around">
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+                >Add Student</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('view_students') }}"
+                >View Students</a
+              >
+            </li>
+  
+            <li class="nav-item">
+              <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+                >Logout</a
+              >
+            </li>
+            <!-- Add other navigation links as needed -->
+          </ul>
+        </div>
+      </nav>
+    <div class="container mt-4">
+        <h2 class="bg-warning p-3 fw-bold text-white">Edit Student_id: {{ student_data[0] }} Academic Information</h2>
+        <form class="form" method="post">
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" value="{{ student_data[1] }}" name="department" class="form-control" required>
+            </div>
+            <!-- Add input fields for each subject -->
+            <!-- Example: Mathematics -->
+            <div class="form-group">
+                <label for="Mathematics">Mathematics:</label>
+                <input type="number" id="Mathematics" value="{{ student_data[2] }}"  name="Mathematics" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="English">English:</label>
+                <input type="number" id="English" value="{{ student_data[3] }}" name="English" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Chemistry">Chemistry:</label>
+                <input type="number" id="Chemistry" name="Chemistry" value="{{ student_data[4] }}"  class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Physics">Physics:</label>
+                <input type="number" id="Physics" name="Physics" value="{{ student_data[5] }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Biology">Biology:</label>
+                <input type="number" id="Biology" name="Biology" value="{{ student_data[6] }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Computer">Computer:</label>
+                <input type="number" id="Computer" name="Computer" value="{{ student_data[7] }}"  class="form-control">
+            </div>
+
+            <div class="form-group"> 
+                <label for="Commerce">Commerce:</label>
+                <input type="number" id="Commerce" name="Commerce" value="{{ student_data[8] }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Acccounting">Acccounting:</label>
+                <input type="number" id="Acccounting" name="Acccounting" value="{{ student_data[9] }}"  class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Literature">Literature:</label>
+                <input type="number" id="Literature" name="Literature" value="{{ student_data[10] }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Government">Government:</label>
+                <input type="number" id="Government" name="Government" value="{{ student_data[11] }}" class="form-control">
+            </div>
+
+            
+            <div class="form-group">
+                <label for="Economic">Economic:</label>
+                <input type="number" id="Economic" name="Economic" value="{{ student_data[12] }}"  class="form-control">
+            </div>
+            <!-- Add input fields for other subjects -->
+            <!-- Example: English, Chemistry, Physics, etc. -->
+            <!-- ... -->
+            <div class="form-group">
+                <label for="year_grade">Year/Grade:</label>
+                <input type="number" id="year_grade" name="year_grade" value="{{ student_data[13] }}"  class="form-control" required>
+            </div>
+            <!-- Include other fields here for class attendance, payments, absence, tardiness, etc. -->
+
+            <!-- Add other fields and pre-fill with existing data -->
+            <input type="submit"  value="Update" class="btn btn-outline-danger fw-bold mt-3 mb-5 btn-block" />
+            <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+        </form>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script

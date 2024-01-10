@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Student</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .card {
+        margin-top: 50px;
+        animation: fadeInUp 1s ease;
+        border-radius: 15px;
+        overflow: hidden;
+        animation: fadeInUp 1s ease;
+      }
+  
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+          .btn-bold {
+    font-weight: bold;
+  }
+
+  .fw-bold{
+    font-weight: bold !important;
+  }
+
+  .btn-outline-light:hover {
+    color: red;
+  }
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand fw-bold" href="#">SIMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+              >Add Student</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="{{ url_for('view_students') }}"
+              >View Students</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Your Dashboard Content Goes Here -->
+    
+
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-header bg-warning text-white">
+              <h1>Edit Student</h1>
+            </div>
+              <div class="card-body">
+              <form method="post" class="form">
+                <input type="hidden" name="student_id" value="{{ student[0] }}" />
+                <label>First Name:</label>
+                <input class="form-control" type="text" name="first_name" value="{{ student[1] }}" required /><br />
+                <label>Last Name:</label>
+                <input type="text" class="form-control" name="last_name" value="{{ student[2] }}" required /><br />
+  
+                <label>Middle Name:</label><br />
+                <input type="text" class="form-control" name="middle_name" value="{{ student[3] }}"  /><br />
+  
+                <label>Date of Birth:</label><br />
+                <input type="date" class="form-control" name="date_of_birth" value="{{ student[4] }}" required /><br />
+  
+                <label>Gender:</label><br />
+                <select id="gender"  class="form-control" name="gender" required>
+                  <option value="Male" {% if  student[5]  == 'Male' %} selected {% endif %}>Male</option>
+                  <option value="Female" {% if student[5]  == 'Female' %} selected {% endif %}>Female</option>
+                </select><br />
+  
+                <label>Phone Number:</label><br />
+                <input type="tel" class="form-control" name="phone_number" value="{{ student[6] }}"  /><br />
+  
+                
+  
+                <label>Address:</label><br />
+                <input type="text" class="form-control" name="address" value="{{ student[7] }}"  /><br />
+  
+                <label>Emergency Contact:</label><br />
+                <input type="text" class="form-control" name="emergency_contact" value="{{ student[8] }}"  /><br />
+  
+                <!-- Add other fields and pre-fill with existing data -->
+                <input type="submit"  value="Update" class="btn btn-outline-danger btn-bold  mt-3 btn-block" />
+              </form>
+              <!-- Add more content here -->
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

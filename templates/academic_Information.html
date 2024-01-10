@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Academic Information</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+         @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animated {
+            animation: fadeIn 1s;
+        }
+
+      .btn-bold {
+font-weight: bold;
+}
+
+.fw-bold{
+font-weight: bold !important;
+}
+
+.btn-outline-warning:hover {
+color: #fff;
+}
+
+.btn-outline-light:hover {
+color: red;
+}
+
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand fw-bold" href="#">SIMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 d-flex justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+              >Add Student</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  fw-bold" href="{{ url_for('view_students') }}"
+              >View Students</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="table-container">
+              <h1 class="text-center bg-warning p-4 fw-bold text-white mt-3">Students Academic Information</h1>
+              <table class="table table-bordered ">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Department</th>
+                    <th>Mathematics</th>
+                    <th>English</th>
+                    <th>Chemistry</th>
+                    <th>Physics</th>
+                    <th>Biology</th>
+                    <th>Computer</th>
+                    <th>Commerce</th>
+                    <th>Acccounting</th>
+                    <th>Literature</th>
+                    <th>Government</th>
+                    <th>Economic</th>
+        
+                    <!-- Add headers for each subject -->
+                    <!-- Example: Mathematics, English, Chemistry, Physics, etc. -->
+                    <!-- ... -->
+                    <th>Year/Grade</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for record in records %}
+                  <tr class="animated">
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                    <td>{{ record[7] }}</td>
+                    <td>{{ record[8] }}</td>
+                    <td>{{ record[9] }}</td>
+                    <td>{{ record[10] }}</td>
+                    <td>{{ record[11] }}</td>
+                    <td>{{ record[12] }}</td>
+                    <!-- Display data for each subject -->
+                    <!-- Example: Mathematics, English, Chemistry, Physics, etc. -->
+                    <!-- ... -->
+                    
+                    <td>{{ record[-1] }}</td>
+                    <td>
+                        <a href="/edit_acadInfo/{{ record[0] }}" class="btn btn-outline-warning fw-bold btn-sm mr-1">Edit</a>
+                    </td>
+                    
+                  </tr>
+                  {% endfor %}
+
+                  <!-- Flash messages -->
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %} {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %} {% endif %} {% endwith %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <a href="/add_record" class="btn btn-primary">Add Record</a> -->
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Your custom CSS for animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animated {
+            animation: fadeIn 1s;
+        }
+
+        .btn-bold {
+font-weight: bold;
+}
+
+.fw-bold{
+font-weight: bold !important;
+}
+
+.btn-outline-warning:hover {
+color: #fff;
+}
+
+.btn-outline-light:hover {
+color: red;
+}
+
+    </style>
+</head>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand fw-bold" href="#">SIMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 d-flex justify-content-around">
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+                >Add Student</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('view_students') }}"
+                >View Students</a
+              >
+            </li>
+  
+            <li class="nav-item">
+              <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+                >Logout</a
+              >
+            </li>
+            <!-- Add other navigation links as needed -->
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container mt-4">
+        <h2>Edit Student Information</h2>
+        <form  method="post" class="animated">
+            <div class="form-group">
+                <label for="admissionDate">Admission Date:</label>
+                <input type="date" class="form-control" id="admissionDate" name="admission_date" value="{{ student_data[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="advisorGuardian">Advisor/Guardian:</label>
+                <input type="text" class="form-control" id="advisorGuardian" name="advisor_guardian" value="{{ student_data[2] }}" >
+            </div>
+            <div class="form-group">
+                <label for="tuitionFees">Tuition Fees:</label>
+                <input type="number" step="0.01" class="form-control" id="tuitionFees" name="tuition_fees" value="{{ student_data[3] }}" >
+            </div>
+
+            <div class="form-group">
+                <label for="tuitionFees">Payments:</label>
+                <input type="number" step="0.01" class="form-control" id="payments" name="payments" value="{{ student_data[4] }}" >
+            </div>
+
+
+            <div class="form-group">
+                <label for="tuitionFees">Class_attendance:</label>
+                <input type="number" step="0.01" class="form-control" id="class_attendance" name="class_attendance" value="{{ student_data[5] }}" >
+            </div>
+
+            <div class="form-group">
+                <label for="absence">Absence:</label>
+                <input type="number" step="0.01" class="form-control" id="absence" name="absence" value="{{ student_data[6] }}" >
+            </div>
+
+            <div class="form-group">
+                <label for="tardiness">Tardiness:</label>
+                <input type="number" step="0.01" class="form-control" id="tardiness" name="tardiness" value="{{ student_data[7] }}" >
+            </div>
+            <!-- Include other fields here for class attendance, payments, absence, tardiness, etc. -->
+
+            <!-- Add other fields and pre-fill with existing data -->
+            <input type="submit"  value="Update" class="btn btn-outline-danger fw-bold mt-3 btn-block" />
+            <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+        </form>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script

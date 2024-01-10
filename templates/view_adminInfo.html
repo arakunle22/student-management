@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Student Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for animation -->
+    <style>
+        /* Your custom CSS for animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animated {
+            animation: fadeIn 1s;
+        }
+
+        .btn-bold {
+font-weight: bold;
+}
+
+.fw-bold{
+font-weight: bold !important;
+}
+
+.btn-outline-warning:hover {
+color: #fff;
+}
+
+.btn-outline-light:hover {
+color: red;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand fw-bold" href="#">SIMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 d-flex justify-content-around">
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('add_student') }}"
+                >Add Student</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  fw-bold" href="{{ url_for('view_students') }}"
+                >View Students</a
+              >
+            </li>
+  
+            <li class="nav-item">
+              <a class="btn btn-outline-light fw-bold" href="{{ url_for('logout') }}"
+                >Logout</a
+              >
+            </li>
+            <!-- Add other navigation links as needed -->
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container mt-4">
+        <h2 class="bg-warning  fw-bold p-3 text-white">Student Information</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Admission Date</th>
+                    <th>Advisor/Guardian</th>
+                    <th>Tuition Fees</th>
+                    <th>Payments</th>
+                    <th>Class Attendance</th>
+                    <th>Absence</th>
+                    <th>Tardiness</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for row in student_data %}
+                    <tr class="animated">
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>
+                            <a href="/edit_adminInfo/{{ row[0] }}" class="btn btn-outline-warning btn-sm mr-1">Edit</a>
+                        </td>
+            
+                    </tr>
+                    {% endfor %}
+
+                    <!-- Flash messages -->
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %} {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %} {% endif %} {% endwith %}
+            </tbody>
+
+            
+        </table>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

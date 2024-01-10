@@ -1,0 +1,126 @@
+# Home page
+@app.route('/academic_Information')
+def academic_Information():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    if request.method == 'POST' and 'search' in request.form:
+        search_query = request.form['search']
+        if search_query:
+            cursor.execute('SELECT * FROM AcademicInformation WHERE student_id = ?', (search_query,))
+        else:
+            cursor.execute('SELECT * FROM AcademicInformation')
+    else:
+        cursor.execute('SELECT * FROM AcademicInformation')
+
+    records = cursor.fetchall()
+    conn.close()
+    return render_template('academic_Information.html', records=records)
+    # return 'Welcome to Academic Information Management'
+
+# Add record page
+@app.route('/add_record', methods=['GET', 'POST'])
+def add_record():
+    if request.method == 'POST':
+        data = request.form
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO AcademicInformation (department, Mathematics, English, Chemistry, Physics, Biology, Computer, Commerce, Acccounting, Literature, Government, Economic, year_grade)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (data['department'], data['Mathematics'], data['English'], data['Chemistry'], data['Physics'], data['Biology'], data['Computer'], data['Commerce'], data['Acccounting'], data['Literature'], data['Government'], data['Economic'], data['year_grade']))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('view_records'))
+    return render_template('add_record.html')
+
+# View records page
+@app.route('/view_records')
+def view_records():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM AcademicInformation')
+    records = cursor.fetchall()
+    conn.close()
+    return render_template('view_records.html', records=records)
+
+
+UPDATE AdministrativeInformation
+            SET department = ?, Mathematics = ?, English = ?, Chemistry = ?, Physics = ?,
+            Biology = ?, Computer = ?, Commerce = ?, Acccounting = ?, Literature = ?,
+            Government = ?, Economic = ?, year_grade = ?
+            WHERE student_id = ?
+        """, (department, Mathematics, English, Chemistry, Physics, Biology, Computer, Commerce, Acccounting, Literature, Government, Economic, year_grade, student_id))
+
+
+student
+
+
+
+
+
+
+
+
+# #################### NEW APPLICATION ####################
+
+# SQLite database connection
+conn = sqlite3.connect('student_database.db')
+cursor = conn.cursor()
+
+# Flask routes
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/input', methods=['GET', 'POST'])
+def input():
+    if request.method == 'POST':
+        # Retrieve form data
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        # ... Retrieve other form fields
+        
+        # Insert data into the database (example for PersonalInformation table)
+        cursor.execute('''
+            INSERT INTO PersonalInformation (first_name, last_name, ...) 
+            VALUES (?, ?, ...);
+        ''', (first_name, last_name, ...))
+        conn.commit()
+        
+        return redirect(url_for('index'))
+    return render_template('input.html')
+
+@app.route('/view')
+def view():
+    cursor.execute('SELECT * FROM PersonalInformation')
+    records = cursor.fetchall()
+    return render_template('view.html', records=records)
+
+
+
+
+
+
+# Route to delete a student record
+@app.route('/delete_student/<int:student_id>', methods=['POST', 'DELETE'])
+def delete_student(student_id):
+    if request.method in ['POST', 'DELETE']:
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute('DELETE FROM PersonalInformation, AcademicInformation, AdministrativeInformation WHERE student_id = ?', (student_id,))
+
+        msg = "Record successfully Deleted From database"
+
+        conn.commit()
+        conn.close()
+
+         # Send the transaction message to result.html
+        return render_template('result.html', msg=msg)
+        # conn.commit()
+
+        # conn.close()
+    return redirect(url_for('view_students'))
+
