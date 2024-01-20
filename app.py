@@ -122,13 +122,16 @@ def add_student():
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (admission_date, advisor_guardian, tuition_fees, payments, class_attendance, absence, tardiness))
 
-        msg = "Record successfully added to database"
 
         conn.commit()
         conn.close()
 
          # Send the transaction message to result.html
-        return render_template('result.html', msg=msg)
+        flash('Record successfully added to database', 'success')  # Flash success message
+         # Send the transaction message to view.html
+        return redirect(url_for('view_students'))
+
+        
     return render_template('add_student.html')
 
 # ############### Route to view Transaction result ###############
