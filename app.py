@@ -166,7 +166,7 @@ def download_records():
     conn = connect_db()
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM PersonalInformation INNER JOIN AcademicInformation ON PersonalInformation.student_id = AcademicInformation.student_id INNER JOIN AdministrativeInformation ON PersonalInformation.student_id = AdministrativeInformation.student_id')
+    cursor.execute('SELECT * FROM PersonalInformation INNER JOIN AcademicInformation ON PersonalInformation.student_id = AcademicInformation.student_id')
     data = cursor.fetchall()
 
     conn.close()
