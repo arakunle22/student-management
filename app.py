@@ -87,13 +87,13 @@ def add_student():
 
         # Insert data into Administartive Information table
 
-        admission_date = request.form['admission_date']
-        advisor_guardian = request.form['advisor_guardian']
-        tuition_fees = request.form['tuition_fees']
-        payments = request.form['payments']
-        class_attendance = request.form['class_attendance']
-        absence = request.form['absence']
-        tardiness = request.form['tardiness']
+        # admission_date = request.form['admission_date']
+        # advisor_guardian = request.form['advisor_guardian']
+        # tuition_fees = request.form['tuition_fees']
+        # payments = request.form['payments']
+        # class_attendance = request.form['class_attendance']
+        # absence = request.form['absence']
+        # tardiness = request.form['tardiness']
 
         
 
@@ -116,11 +116,11 @@ def add_student():
 
         # Insert new record into  AdministrativeInformation table
 
-        cursor.execute('''
-            INSERT INTO AdministrativeInformation 
-            (admission_date, advisor_guardian, tuition_fees, payments, class_attendance, absence, tardiness)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (admission_date, advisor_guardian, tuition_fees, payments, class_attendance, absence, tardiness))
+        # cursor.execute('''
+        #     INSERT INTO AdministrativeInformation 
+        #     (admission_date, advisor_guardian, tuition_fees, payments, class_attendance, absence, tardiness)
+        #     VALUES (?, ?, ?, ?, ?, ?, ?)
+        # ''', (admission_date, advisor_guardian, tuition_fees, payments, class_attendance, absence, tardiness))
 
 
         conn.commit()
