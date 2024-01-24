@@ -3,7 +3,7 @@ from flask import send_file, Response
 from flask import flash
 import csv
 import io
-import sqlite3
+import mysql.connector
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 app.secret_key = 'your_secret_key'
@@ -11,7 +11,12 @@ app.secret_key = 'your_secret_key'
 
 # ############### Function to connect to the SQLite database  ###############
 def connect_db():
-    return sqlite3.connect('database.db')
+    return mysql.connector.connect(
+        host='fdb32.awardspace.net',
+        user='3860677_lucky',
+        password='quadri201',
+        database='3860677_lucky'
+    )
 
 # ############### Route for the login page #######################################
 @app.route('/', methods=['GET', 'POST'])
